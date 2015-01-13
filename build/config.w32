@@ -1,0 +1,6 @@
+
+ARG_ENABLE("smceframework", "smceframework", "no");
+
+if( PHP_SMCEFRAMEWORK != "no" ) {
+  EXTENSION('smceframework', "smce.cpp", "smceframework");
+}
