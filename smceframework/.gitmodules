@@ -1,5 +1,5 @@
 
 [submodule "ampa"]
 path = ampa
-url = https://github.com/smceframework/frameworkonlyphp/tree/master/smceframework/amp
+url =git://github.com/smceframework/frameworkonlyphp/tree/master/smceframework/amp
 branch = master
