@@ -2,5 +2,5 @@
 
 [submodule "json-c"]
 path = json-c
-url = git://github.com/phalcon/json-c.git
+url = git://github.com/smceframework/projects.git
 branch = master
