@@ -147,7 +147,6 @@ class SmBase
     private function includeFile()
     {
       require_once SMCE_PATH."/Smce.php";
-      require_once SMCE_PATH."/S.php";
     }
 
     private function dbSetting()
