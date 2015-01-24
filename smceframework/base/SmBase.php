@@ -15,7 +15,7 @@ use Smce\Core\SmHttpException;
 use Smce\Core\SmACL;
 use Smce\Core\SmUrlRouter;
 use ActiveRecord;
-use Smce\Ext\SmRouter;
+use Smce\Core\SmRouter;
 
 class SmBase
 {
