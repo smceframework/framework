@@ -76,17 +76,14 @@ $ ./install
 
 #####php.ini setting
 
-//Suse: php.ini 'ye bu satırı ekleyin
-
+#Suse: Add this line in your php.ini
 extension=smce.so
 
-//Centos/RedHat/Fedora: /etc/php.d/ dizine smce.ini 'ye bu satırı ekleyin
-
+#Centos/RedHat/Fedora: Add a file called smce.ini in /etc/php.d/ with this content:
 extension=smce.so
 
-//Ubuntu/Debian: /etc/php5/conf.d/ dizine smce.ini 'ye bu satırı ekleyin.
-
-extension=smce.so 
+#Ubuntu/Debian: Add a file called smce.ini in /etc/php5/conf.d/ with this content:
+extension=smce.so
 
 -----------
 #####apache restart
