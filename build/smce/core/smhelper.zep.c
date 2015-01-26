@@ -16,6 +16,13 @@
 #include "kernel/fcall.h"
 
 
+/**
+ *
+ * @author Samed Ceylan
+ * @link http://www.samedceylan.com/
+ * @copyright 2015 SmceFramework
+ * @github https://github.com/smceframework
+ */
 ZEPHIR_INIT_CLASS(Smce_Core_SmHelper) {
 
 	ZEPHIR_REGISTER_CLASS(Smce\\Core, SmHelper, smce, core_smhelper, smce_core_smhelper_method_entry, 0);

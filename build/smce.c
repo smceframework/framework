@@ -26,6 +26,7 @@
 
 
 
+zend_class_entry *smce_core_smacl_ce;
 zend_class_entry *smce_core_smdbcriteria_ce;
 zend_class_entry *smce_core_smexception_ce;
 zend_class_entry *smce_core_smhelper_ce;
@@ -53,6 +54,7 @@ static PHP_MINIT_FUNCTION(smce)
 	setlocale(LC_ALL, "C");
 #endif
 
+	ZEPHIR_INIT(Smce_Core_SmACL);
 	ZEPHIR_INIT(Smce_Core_SmDbCriteria);
 	ZEPHIR_INIT(Smce_Core_SmException);
 	ZEPHIR_INIT(Smce_Core_SmHelper);

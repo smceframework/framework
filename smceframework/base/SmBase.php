@@ -5,7 +5,7 @@
  * @author Samed Ceylan
  * @link http://www.samedceylan.com/
  * @copyright 2015 SmceFramework
- * @github https://github.com/imadige/SMCEframework-MVC
+ * @github https://github.com/smceframework
  */
 
 namespace Smce\Base;
@@ -16,6 +16,7 @@ use Smce\Core\SmACL;
 use Smce\Core\SmUrlRouter;
 use ActiveRecord;
 use Smce\Core\SmRouter;
+use Smce;
 
 class SmBase
 {
@@ -81,6 +82,7 @@ class SmBase
 
     private function command()
     {
+		
         if (! is_file(BASE_PATH."/main/controller/".ucfirst($this->controller)."Controller.php")) {
             SmHttpException::htppError(404,"Controller Not Found");
 			exit;
@@ -110,9 +112,8 @@ class SmBase
                 $accessRules=$class->accessRules();
 
                 if (is_array($accessRules) && count($accessRules)>0) {
-
                     $SmACL=new SmACL();
-                    if($SmACL->rules($accessRules,$this->view))
+                    if($SmACL->rules($accessRules,$this->view,Smce::app()->IP,Smce::app()->getState(md5(md5("SMCE_".Smce::app()->securitycode)))))
                         $class->$actionView();
                     else{
 						header('HTTP/1.0 404 Not Found');

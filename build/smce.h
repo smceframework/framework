@@ -4,6 +4,7 @@
 #ifndef ZEPHIR_CLASS_ENTRIES_H
 #define ZEPHIR_CLASS_ENTRIES_H
 
+#include "smce/core/smacl.zep.h"
 #include "smce/core/smdbcriteria.zep.h"
 #include "smce/core/smexception.zep.h"
 #include "smce/core/smhelper.zep.h"

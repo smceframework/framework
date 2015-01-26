@@ -5,7 +5,7 @@
  * @author Samed Ceylan
  * @link http://www.samedceylan.com/
  * @copyright 2015 SmceFramework
- * @github https://github.com/imadige/SMCEframework-MVC
+ * @github https://github.com/smceframework
  */
 
 namespace Smce;
@@ -119,7 +119,6 @@ class SmAutoload
 			"Smce\Core\SmController"=>SMCE_PATH."/core/SmController.php",
 			"Smce\Core\SmFormModel"=>SMCE_PATH."/core/SmFormModel.php",
 			"Smce\Core\SmUserIdentity"=>SMCE_PATH."/core/SmUserIdentity.php",
-			"Smce\Core\SmACL"=>SMCE_PATH."/core/SmACL.php",
 			"Smce\Core\SmUser"=>SMCE_PATH."/core/SmUser.php",
 			"Smce\Core\SmLayout"=>SMCE_PATH."/core/SmLayout.php",
 			"Smce\Core\SmModel"=>SMCE_PATH."/core/SmModel.php",
