@@ -40,25 +40,54 @@ https://packagist.org/packages/smce/framework
 
 # Installation
 
-####  Ubuntu
-
-$ sudo apt-get install php5-dev  gcc make
+#### Ubuntu
 
 
-####  Suse
-$ sudo yast -i gcc make php5-devel
+$ cd /var/www/smceframework
 
-
-####  CentOS/RedHat/Fedora
-$ sudo yum install php-devel gcc make
-
-
--------------
+$ sudo apt-get install php5-dev libpcre3-dev gcc make
 
 $ cd build
 
-$ ./install
+$ ./install 
 
+#### CentOS/RedHat/Fedora
+
+$ cd /var/www/smceframework
+
+$ sudo yum install php-devel pcre-devel gcc make
+
+$ cd build
+
+$ ./install 
+
+#### Suse
+
+
+$ cd /var/www/smceframework
+
+$ sudo yast -i gcc make autoconf2.13 php5-devel php5-pear
+
+$ cd build
+
+$ ./install 
+
+
+php.ini setting
+
+//Suse: php.ini 'ye bu satırı ekleyin
+extension=smce.so
+
+//Centos/RedHat/Fedora: /etc/php.d/ dizine smce.ini 'ye bu satırı ekleyin
+extension=smce.so
+
+//Ubuntu/Debian: /etc/php5/conf.d/ dizine smce.ini 'ye bu satırı ekleyin.
+extension=smce.so 
+
+
+apache restart
+
+$ service apache2 restart  
 
 
 ## Gelistirici Hakkinda
