@@ -77,12 +77,15 @@ $ ./install
 #####php.ini setting
 
 //Suse: php.ini 'ye bu satırı ekleyin
+
 extension=smce.so
 
 //Centos/RedHat/Fedora: /etc/php.d/ dizine smce.ini 'ye bu satırı ekleyin
+
 extension=smce.so
 
 //Ubuntu/Debian: /etc/php5/conf.d/ dizine smce.ini 'ye bu satırı ekleyin.
+
 extension=smce.so 
 
 -----------
