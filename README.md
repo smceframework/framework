@@ -72,8 +72,9 @@ $ cd build
 
 $ ./install 
 
+-----------
 
-php.ini setting
+#####php.ini setting
 
 //Suse: php.ini 'ye bu satırı ekleyin
 extension=smce.so
@@ -84,8 +85,8 @@ extension=smce.so
 //Ubuntu/Debian: /etc/php5/conf.d/ dizine smce.ini 'ye bu satırı ekleyin.
 extension=smce.so 
 
-
-apache restart
+-----------
+#####apache restart
 
 $ service apache2 restart  
 
