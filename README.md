@@ -76,13 +76,13 @@ $ ./install
 
 #####php.ini setting
 
-#Suse: Add this line in your php.ini
+Suse: Add this line in your php.ini
 extension=smce.so
 
-#Centos/RedHat/Fedora: Add a file called smce.ini in /etc/php.d/ with this content:
+Centos/RedHat/Fedora: Add a file called smce.ini in /etc/php.d/ with this content:
 extension=smce.so
 
-#Ubuntu/Debian: Add a file called smce.ini in /etc/php5/conf.d/ with this content:
+Ubuntu/Debian: Add a file called smce.ini in /etc/php5/conf.d/ with this content:
 extension=smce.so
 
 -----------
