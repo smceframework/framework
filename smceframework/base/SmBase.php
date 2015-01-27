@@ -153,8 +153,7 @@ class SmBase
     private function dbSetting()
     {
 		
-		if(isset(SmBase::$config["components"]["activerecord"])){
-			
+		if(isset(SmBase::$config["components"]["activerecord"]) && count(SmBase::$config["components"]["activerecord"])>0){
 			require_once SMCE_PATH.'/extension/SmActiverecord/ActiveRecord.php';
 			
 			ActiveRecord\Config::initialize(function($cfg)
