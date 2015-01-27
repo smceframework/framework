@@ -13,9 +13,8 @@ namespace Smce\Base;
 
 use Smce\Core\SmHttpException;
 use Smce\Core\SmACL;
-use Smce\Core\SmUrlRouter;
-use ActiveRecord;
 use Smce\Core\SmRouter;
+use ActiveRecord;
 use Smce;
 
 class SmBase
@@ -23,18 +22,36 @@ class SmBase
     public static $config;
 	public static $configSmce;
 
-    public $controller;
-    public $view;
+    public static $controller;
+    public static $view;
+
+    /**
+	 *
+	 * void
+	 *
+	 * 
+	 */
 	
     public function run()
     {
         session_start();
-        SmBase::baseURL();
+
+        SmBase::router();
+
         SmBase::includeFile();
+
         SmBase::dbSetting();
+
         SmBase::command();
 		
     }
+
+    /**
+	 *
+	 * void
+	 *
+	 * 
+	 */
 
 	public function commandLineRun()
     {
@@ -42,16 +59,36 @@ class SmBase
         SmBase::dbSetting();
     }
 
-    private function baseURL()
+    /**
+	 *
+	 *
+	 * @return request
+	 * 
+	 */
+
+    private static function getRequestUri()
     {
-		$request=str_replace($this->base_url(), "",isset($_SERVER["REQUEST_URI"])?$_SERVER["REQUEST_URI"]:"");
+    	$request=str_replace(self::base_url(), "",isset($_SERVER["REQUEST_URI"])?$_SERVER["REQUEST_URI"]:"");
+
 		
 		if(substr($request,0,1)=="/")
 			$request=substr($request,1,strlen($request));
 			
-		$request=str_replace("index.php", "",$request);
+		return str_replace("index.php", "",$request);
 		
-		$SmRouter=new SmRouter;
+    }
+
+     /**
+	 * 
+	 * @param request
+	 *
+	 * @return SmRouter requestArray
+	 * 
+	 */
+
+    private static function setSmRouter($request)
+    {
+    	$SmRouter=new SmRouter;
 		
 		$SmRouter->setRequest($request);
 
@@ -63,45 +100,157 @@ class SmBase
 		}else
 			$SmRouter->setRouter(self::$configSmce["urlrouter"]);
 		
-		$requestArray=$SmRouter->run();
-		
-	
-		if(isset($requestArray)){
+		return $SmRouter->run();
+
+    }
+
+      /**
+     *
+	 * @param requestArray
+	 *
+	 * @void
+	 * 
+	 */
+
+
+    private static function setControllerView($requestArray)
+    {
+    	if(isset($requestArray)){
 			foreach ($requestArray as $key => $value)
 				$_GET[$key]=$value;
 			
 		}
 		
-      	$this->controller=strtolower($requestArray["controller"]);
-        $this->view=strtolower($requestArray["view"]);
+      	self::$controller=strtolower($requestArray["controller"]);
+        self::$view=strtolower($requestArray["view"]);
 		
-        define('BASE_CONTROLLER',strtolower($this->controller));
-        define('BASE_VIEW',strtolower($this->view));
-
+        define('BASE_CONTROLLER',strtolower(self::$controller));
+        define('BASE_VIEW',strtolower(self::$view));
     }
 
-    private function command()
+
+      /**
+     *
+	 * 
+	 *
+	 * @void
+	 * 
+	 */
+   
+    private static function router()
     {
 		
-        if (! is_file(BASE_PATH."/main/controller/".ucfirst($this->controller)."Controller.php")) {
-            SmHttpException::htppError(404,"Controller Not Found");
-			exit;
-        }
-		$componentsController="";
-		if (is_file(BASE_PATH."/main/components/Controller.php")) {
-			require BASE_PATH."/main/components/Controller.php";
-			$componentsController=new \Controller;
-		}
-		
-        require BASE_PATH."/main/controller/".ucfirst($this->controller)."Controller.php";
+		$request=self::getRequestUri();
 
-        if(!empty($this->controller->layout))
-            SmBase::$layout=$this->controller->layout;
+		self::setControllerView(self::setSmRouter($request));
 		
-        $actionView = 'action'.ucfirst($this->view);
-        $actionController = ucfirst($this->controller."Controller");
+    }
+
+
+      /**
+     *
+	 * 
+	 *
+	 * @void
+	 * 
+	 */
+
+
+    private static function command()
+    {
+        
+        self::isController();
+
+		$componentsController=self::isComponentsController();
 		
-		$this->controllerAction($componentsController,"beforeAction");
+		self::includeController();
+        
+		self::setLayout();
+        
+		self::getControllerAction($componentsController);
+        
+    }
+
+
+
+      /**
+     *
+	 *
+	 *
+	 * @void
+	 * 
+	 */
+
+    private static function isController()
+    {
+    	if (! is_file(BASE_PATH."/main/controller/".ucfirst(self::$controller)."Controller.php")) {
+            SmHttpException::htppError(404,"Controller Not Found");
+			exit();
+        }
+    }
+
+
+      /**
+     *
+	 * 
+	 *
+	 * @return Controller or empty;
+	 * 
+	 */
+
+    private static function isComponentsController()
+    {
+    	if (is_file(BASE_PATH."/main/components/Controller.php")) {
+			require BASE_PATH."/main/components/Controller.php";
+			return new \Controller;
+		}else
+			return "";
+    }
+
+     /**
+     *
+	 * 
+	 *
+	 * @void
+	 * 
+	 */
+
+
+    private static function includeController()
+    {
+
+    	require BASE_PATH."/main/controller/".ucfirst(self::$controller)."Controller.php";
+    }
+
+     /**
+     *
+	 * 
+	 *
+	 * @void
+	 * 
+	 */
+
+    private static function setLayout()
+    {
+
+    	if(!empty(self::$controller->layout))
+            SmBase::$layout=self::$controller->layout;
+    }
+
+     /**
+     *
+	 * @param componentsController
+	 *
+	 * @void
+	 * 
+	 */
+
+    public static function getControllerAction($componentsController)
+    {
+    	$actionView = 'action'.ucfirst(self::$view);
+        $actionController = ucfirst(self::$controller."Controller");
+		
+		self::controllerAction($componentsController,"beforeAction");
 		
         $class = new $actionController;
 		
@@ -112,11 +261,12 @@ class SmBase
                 $accessRules=$class->accessRules();
 
                 if (is_array($accessRules) && count($accessRules)>0) {
+
                     $SmACL=new SmACL();
                     if($SmACL->rules($accessRules,$this->view,Smce::app()->IP,Smce::app()->getState(md5(md5("SMCE_".Smce::app()->securitycode)))))
                         $class->$actionView();
                     else{
-						header('HTTP/1.0 404 Not Found');
+					    header('HTTP/1.0 404 Not Found');
                         SmHttpException::htppError(404,"You do not have authority to allow");
 					}
                 }
@@ -124,36 +274,66 @@ class SmBase
 				try
 				{
 					$class->$actionView();
-					$this->controllerAction($componentsController,"afterAction");
+					self::controllerAction($componentsController,"afterAction");
+
 				}catch(SmHttpException $e){
+
 				 	SmHttpException::htppError($e->getHttpCode,$e->getMessage());
+
 				}
             }
 
         } else {
+
 			header('HTTP/1.0 404 Not Found');
             SmHttpException::htppError(404,"Page Not Found");
+
         }
     }
+    
+    /**
+     *
+	 * @param $class
+	 * @param $action
+	 *
+	 * @void
+	 * 
+	 */
 	
-	public function controllerAction($class,$action)
+	public static function controllerAction($class,$action)
 	{	
 		if(method_exists($class, $action))
 		{
 			$class->$action();
 		}
 	}
+
+
+	  /**
+     *
+	 *
+	 * @void
+	 * 
+	 */
  
 
     private function includeFile()
     {
-      require_once SMCE_PATH."/Smce.php";
+      	require_once SMCE_PATH."/Smce.php";
     }
+
+
+      /**
+     *
+	 * @void
+	 * 
+	 */
 
     private function dbSetting()
     {
 		
 		if(isset(SmBase::$config["components"]["activerecord"]) && count(SmBase::$config["components"]["activerecord"])>0){
+			
 			require_once SMCE_PATH.'/extension/SmActiverecord/ActiveRecord.php';
 			
 			ActiveRecord\Config::initialize(function($cfg)
@@ -165,13 +345,19 @@ class SmBase
 					));
 				}
 			});
-			
-			
+
 		}
 		
     }
 
-	private function base_url()
+      /**
+     *
+	 *
+	 * @return baseUrl
+	 * 
+	 */
+
+	private static function base_url()
 	{
 		return str_replace("/index.php","",$_SERVER['SCRIPT_NAME']);
 	}
