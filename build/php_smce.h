@@ -11,7 +11,7 @@
 #include "kernel/globals.h"
 
 #define PHP_SMCE_NAME        "smce"
-#define PHP_SMCE_VERSION     "1.0.1b"
+#define PHP_SMCE_VERSION     "1.0.2"
 #define PHP_SMCE_EXTNAME     "Smceframework"
 #define PHP_SMCE_AUTHOR      "Samed Ceylan"
 #define PHP_SMCE_ZEPVERSION  "0.5.9a"
