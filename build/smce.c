@@ -143,14 +143,13 @@ static PHP_MINFO_FUNCTION(smce)
 	php_info_print_table_end();
 
 	php_info_print_table_start();
-	php_info_print_table_header(2, "Directive", "Value");
-	php_info_print_table_row(2, "setting1", "value1");
-	php_info_print_table_row(2, "setting2", "value2");
-	php_info_print_table_end();
-	php_info_print_table_start();
-	php_info_print_table_header(2, "Directive", "Value");
-	php_info_print_table_row(2, "setting3", "value3");
-	php_info_print_table_row(2, "setting4", "value4");
+	php_info_print_table_header(2, "Directive");
+	php_info_print_table_row(2, "Smce\Core\SmACL");
+	php_info_print_table_row(2, "Smce\Core\SmDbCriteria");
+	php_info_print_table_row(2, "Smce\Core\SmException");
+	php_info_print_table_row(2, "Smce\Core\SmHelper");
+	php_info_print_table_row(2, "Smce\Core\SmOutput");
+	php_info_print_table_row(2, "Smce\Core\SmUrlManager");
 	php_info_print_table_end();
 
 }
