@@ -13,7 +13,7 @@ before_script:
 - cd build
 - ./install 
 - echo "extension = smce.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-- service apache2 restart
+- sudo service apache2 restart
 - cd ..
 
 
