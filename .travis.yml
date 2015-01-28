@@ -9,7 +9,7 @@ php:
 - 5.6
 
 before_script:
-- sudo apt-get install php5-dev libpcre3-dev gcc make
+- sudo apt-get install apache2 libapache2-mod-fastcgi php5-dev libpcre3-dev gcc make
 - cd build
 - ./install 
 - echo "extension = smce.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
