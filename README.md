@@ -43,6 +43,7 @@ https://packagist.org/packages/smce/framework
 #### Ubuntu
 
 
+
 $ cd /var/www/smceframework
 
 $ sudo apt-get install php5-dev libpcre3-dev gcc make
