@@ -24,5 +24,11 @@ class Smce
       return static::$SmLayout;
     }
 
+    public static function defined($controller,$view)   
+    {
+        define('BASE_CONTROLLER',strtolower($controller));
+        define('BASE_VIEW',strtolower($view));
+    }
+
 	
 }
