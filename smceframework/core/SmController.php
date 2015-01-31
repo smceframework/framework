@@ -23,8 +23,6 @@ class SmController
 	
 	public $layout="";
 	
-	public static $error;
-
 	const COMPENENTS="Controller";
 
     public function render($view = "", $array = array())
@@ -73,7 +71,8 @@ class SmController
 
 	private function setTheme()
 	{
-		 define("BASE_THEME", $this->theme);
+		if(!defined("BASE_THEME"))
+		   define("BASE_THEME", $this->theme);
 	}
 	
 	/**
