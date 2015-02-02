@@ -1,95 +1,18 @@
-﻿## Hello World
+﻿## Smce PHP Framework
 
-![SmceFramework Hello World](http://i57.tinypic.com/28kt5xw.jpg)
+The Framework gets this name from letters of Developer Samed Ceylan's, it’s PHP library, using the php and c together, developed for high performance .
 
-## Composer
-https://packagist.org/packages/smce/framework
-
-## Features
-
-- MVC
-- PSR
-- Autoload
-- Session Management
-- Assets Manager
-- Temp Manager
-- Validation
-- Masterpage/Layout
-- Template Engine
-- GRUD
-- Smce Command Line
-- ORM ActiveRecord(MySQL, SQLite, PostgreSQL, Oracle)
-- Using ActiveRecord on Multiple Databases
-- Accses Control Lists (ACL)
-- Debug
-- Logger
-- Router
-- Use SSH to Connect to a Remote Server (SSH,FTP)
-- Using multiple ssh and ftp over SSH
-- Exception Class
-- Zip Encoding Class
-- User Agent Class
-- Pagination Class
-- Output Class
-- MemCache Class
-- Redis Class
-- Migration Class
-- Helper Class - Enriched With Anonymous Closure Functions
-- Http Exceptions Capture (404, 403 .. vs Page)
-- Widgets
-
-# Installation
-
-#### Ubuntu
+The Smceframework is  well thought out architecture,Professional, flexible, simple, fast, safe, and designed correctly a framework. Smce has flexible structure of OOP(Object-oriented programming),unrepeated for developer DRY(Don’t Repeat Yourself), provides fast and clean codding environment. It has been developed to MVC structure in accordance; reinforced support  from Query Builder, Active Record, have widgets from support AJAX, have the ability to work together MemCache and Redis, and with many more features we can say that Framework can be only open-source code and Free Framework. Also Smce, offers debug mode(debug). Smce is provide better performance than other Frameworks.
 
 
+## Official Documentation
 
-$ cd /var/www/smceframework
-
-$ sudo apt-get install php5-dev libpcre3-dev gcc make
-
-$ cd build
-
-$ ./install 
-
-#### CentOS/RedHat/Fedora
-
-$ cd /var/www/smceframework
-
-$ sudo yum install php-devel pcre-devel gcc make
-
-$ cd build
-
-$ ./install 
-
-#### Suse
+Documentation for the entire framework can be found on the [Smceframework website](http://www.smceframework.com/en/pages/show/1/introduction).
 
 
-$ cd /var/www/smceframework
+### License
 
-$ sudo yast -i gcc make autoconf2.13 php5-devel php5-pear
-
-$ cd build
-
-$ ./install 
-
------------
-
-#####php.ini setting
-
-Suse: Add this line in your php.ini
-extension=smce.so
-
-Centos/RedHat/Fedora: Add a file called smce.ini in /etc/php.d/ with this content:
-extension=smce.so
-
-Ubuntu/Debian: Add a file called smce.ini in /etc/php5/conf.d/ with this content:
-extension=smce.so
-
------------
-#####apache restart
-
-$ service apache2 restart  
+The Smceframework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
 
 
 ## Gelistirici Hakkinda
