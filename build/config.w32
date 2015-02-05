@@ -5,6 +5,7 @@ if (PHP_SMCE != "no") {
   ADD_SOURCES(configure_module_dirname + "/kernel", "main.c memory.c exception.c hash.c debug.c backtrace.c object.c array.c string.c fcall.c require.c file.c operators.c concat.c variables.c filter.c iterator.c exit.c", "smce");
   ADD_SOURCES(configure_module_dirname + "/kernel/extended", "array.c", "smce");
   
-  ADD_SOURCES(configure_module_dirname + "/smce/core", "smacl.zep.c smdbcriteria.zep.c smexception.zep.c smhelper.zep.c smoutput.zep.c smrouter.zep.c smurlmanager.zep.c", "smce");
+  ADD_SOURCES(configure_module_dirname + "/smce/base", "csmbase.zep.c", "smce");
+	ADD_SOURCES(configure_module_dirname + "/smce/core", "smacl.zep.c smdbcriteria.zep.c smexception.zep.c smhelper.zep.c smoutput.zep.c smrouter.zep.c smurlmanager.zep.c", "smce");
   ADD_FLAG("CFLAGS_SMCE", "/D ZEPHIR_RELEASE");
 }

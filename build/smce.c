@@ -26,6 +26,7 @@
 
 
 
+zend_class_entry *smce_base_csmbase_ce;
 zend_class_entry *smce_core_smacl_ce;
 zend_class_entry *smce_core_smdbcriteria_ce;
 zend_class_entry *smce_core_smexception_ce;
@@ -54,6 +55,7 @@ static PHP_MINIT_FUNCTION(smce)
 	setlocale(LC_ALL, "C");
 #endif
 
+	ZEPHIR_INIT(Smce_Base_CSmBase);
 	ZEPHIR_INIT(Smce_Core_SmACL);
 	ZEPHIR_INIT(Smce_Core_SmDbCriteria);
 	ZEPHIR_INIT(Smce_Core_SmException);
@@ -143,13 +145,14 @@ static PHP_MINFO_FUNCTION(smce)
 	php_info_print_table_end();
 
 	php_info_print_table_start();
-	php_info_print_table_header(1, "Directive");
-	php_info_print_table_row(1, "Smce\Core\SmACL");
-	php_info_print_table_row(1, "Smce\Core\SmDbCriteria");
-	php_info_print_table_row(1, "Smce\Core\SmException");
-	php_info_print_table_row(1, "Smce\Core\SmHelper");
-	php_info_print_table_row(1, "Smce\Core\SmOutput");
-	php_info_print_table_row(1, "Smce\Core\SmUrlManager");
+	php_info_print_table_header(2, "Directive", "Value");
+	php_info_print_table_row(2, "setting1", "value1");
+	php_info_print_table_row(2, "setting2", "value2");
+	php_info_print_table_end();
+	php_info_print_table_start();
+	php_info_print_table_header(2, "Directive", "Value");
+	php_info_print_table_row(2, "setting3", "value3");
+	php_info_print_table_row(2, "setting4", "value4");
 	php_info_print_table_end();
 
 }

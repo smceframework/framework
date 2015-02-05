@@ -13,18 +13,15 @@ namespace Smce\Base;
 
 use Smce\Core\SmHttpException;
 use Smce\Core\SmACL;
-use Smce\Core\SmRouter;
+
 use Smce\SmAutoload;
 use ActiveRecord;
 use Smce;
 
-class SmBase
+class SmBase extends CSmBase
 {
-    public static $config;
-
-    public static $controller;
-    public static $view;
-
+	
+	
     /**
 	 *
 	 * void
@@ -82,55 +79,9 @@ class SmBase
 		
     }
 
-     /**
-	 * 
-	 * @param request
-	 *
-	 * @return SmRouter requestArray
-	 * 
-	 */
+     
 
-    private function setSmRouter($request)
-    {
-    	$SmRouter=new SmRouter;
-		
-		$SmRouter->setRequest($request);
-
-		if(isset($_GET["route"]))
-		{
-			$SmRouter->setRoute($_GET["route"]);
-		}
-
-		if(isset(self::$config["urlrouter"]))
-		{
-			$SmRouter->setRouter(self::$config["urlrouter"]);
-		}
-		
-		return $SmRouter->run();
-
-    }
-
-      /**
-     *
-	 * @param requestArray
-	 *
-	 * @void
-	 * 
-	 */
-
-
-    private function setControllerView($requestArray)
-    {
-    	if(isset($requestArray)){
-			foreach ($requestArray as $key => $value)
-				$_GET[$key]=$value;
-			
-		}
-		
-      	self::$controller=strtolower($requestArray["controller"]);
-        self::$view=strtolower($requestArray["view"]);
-		
-    }
+     
 
 
       /**
@@ -195,26 +146,7 @@ class SmBase
    
 
 
-      /**
-     *
-	 *
-	 *
-	 * @void
-	 * 
-	 */
-
-    private function isController()
-    {
-    	if (class_exists(ucfirst(self::$controller)."Controller")) {
-
-            return true;
-
-        }else
-        {
-
-        	return false;
-        }
-    }
+     
 
 
       /**
