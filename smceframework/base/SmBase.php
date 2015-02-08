@@ -207,7 +207,7 @@ class SmBase extends CSmBase
            
             if (method_exists ($class , "accessRules" )) {
 
-                $accessRules=$class->$accessRules();
+                $accessRules=$class->accessRules();
 
                 if (is_array($accessRules) && count($accessRules)>0) {
 
