@@ -13,10 +13,9 @@
 
 #include "kernel/main.h"
 #include "kernel/object.h"
-#include "kernel/hash.h"
 #include "kernel/array.h"
+#include "kernel/hash.h"
 #include "kernel/memory.h"
-#include "kernel/string.h"
 #include "kernel/fcall.h"
 #include "kernel/operators.h"
 
@@ -48,12 +47,12 @@ ZEPHIR_INIT_CLASS(Smce_Core_SmACL) {
  */
 PHP_METHOD(Smce_Core_SmACL, rules) {
 
-	zephir_fcall_cache_entry *_9 = NULL, *_12 = NULL, *_16 = NULL;
+	zephir_fcall_cache_entry *_7 = NULL, *_11 = NULL, *_15 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zend_bool _3, _6, _13;
-	HashTable *_1;
-	HashPosition _0;
-	zval *accessRules, *view, *ip = NULL, *loginState = NULL, *value = NULL, **_2, *_4 = NULL, *_5, *_7 = NULL, *_8, *_10, *_11, *_14 = NULL, *_15;
+	zend_bool _4, _12;
+	HashTable *_2;
+	HashPosition _1;
+	zval *accessRules, *view, *ip = NULL, *loginState = NULL, *value = NULL, *_0, **_3, *_5 = NULL, *_6, *_8 = NULL, *_9, *_10, *_13 = NULL, *_14;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 2, 2, &accessRules, &view, &ip, &loginState);
@@ -69,45 +68,39 @@ PHP_METHOD(Smce_Core_SmACL, rules) {
 
 
 	zephir_update_property_this(this_ptr, SL("ip"), ip TSRMLS_CC);
-	zephir_update_property_this(this_ptr, SL("loginState"), loginState TSRMLS_CC);
-	zephir_is_iterable(accessRules, &_1, &_0, 0, 0, "smce/core/smacl.zep", 46);
+	zephir_array_fetch_string(&_0, accessRules, SL("actions"), PH_NOISY | PH_READONLY, "smce/core/smacl.zep", 28 TSRMLS_CC);
+	zephir_is_iterable(_0, &_2, &_1, 0, 0, "smce/core/smacl.zep", 52);
 	for (
-	  ; zephir_hash_get_current_data_ex(_1, (void**) &_2, &_0) == SUCCESS
-	  ; zephir_hash_move_forward_ex(_1, &_0)
+	  ; zephir_hash_get_current_data_ex(_2, (void**) &_3, &_1) == SUCCESS
+	  ; zephir_hash_move_forward_ex(_2, &_1)
 	) {
-		ZEPHIR_GET_HVALUE(value, _2);
-		_3 = zephir_array_isset_string(value, SS("actions"));
-		if (_3) {
-			ZEPHIR_INIT_NVAR(_4);
-			zephir_fast_strtolower(_4, view);
-			zephir_array_fetch_string(&_5, value, SL("actions"), PH_NOISY | PH_READONLY, "smce/core/smacl.zep", 29 TSRMLS_CC);
-			_3 = zephir_fast_in_array(_4, _5 TSRMLS_CC);
-		}
-		if (_3) {
-			_6 = zephir_array_isset_string(value, SS("ip"));
-			if (_6) {
-				zephir_array_fetch_string(&_8, value, SL("ip"), PH_NOISY | PH_READONLY, "smce/core/smacl.zep", 31 TSRMLS_CC);
-				ZEPHIR_CALL_METHOD(&_7, this_ptr, "ipadresssearch", &_9, _8);
-				zephir_check_call_status();
-				_6 = ZEPHIR_IS_TRUE(_7);
-			}
-			if (_6) {
-				RETURN_MM_BOOL(1);
-			}
-			zephir_array_fetch_string(&_10, value, SL("users"), PH_NOISY | PH_READONLY, "smce/core/smacl.zep", 36 TSRMLS_CC);
-			zephir_array_fetch_string(&_11, value, SL("redirect"), PH_NOISY | PH_READONLY, "smce/core/smacl.zep", 36 TSRMLS_CC);
-			ZEPHIR_CALL_METHOD(NULL, this_ptr, "logincontrol", &_12, _10, _11);
+		ZEPHIR_GET_HVALUE(value, _3);
+		_4 = zephir_array_isset_string(accessRules, SS("ip"));
+		if (_4) {
+			zephir_array_fetch_string(&_6, accessRules, SL("ip"), PH_NOISY | PH_READONLY, "smce/core/smacl.zep", 30 TSRMLS_CC);
+			ZEPHIR_CALL_METHOD(&_5, this_ptr, "ipadresssearch", &_7, _6);
 			zephir_check_call_status();
-			_13 = zephir_array_isset_string(value, SS("expression"));
-			if (_13) {
-				zephir_array_fetch_string(&_15, value, SL("expression"), PH_NOISY | PH_READONLY, "smce/core/smacl.zep", 38 TSRMLS_CC);
-				ZEPHIR_CALL_METHOD(&_14, this_ptr, "expressioncontrol", &_16, _15);
-				zephir_check_call_status();
-				_13 = ZEPHIR_IS_TRUE(_14);
-			}
-			if (_13) {
-				RETURN_MM_BOOL(1);
-			}
+			_4 = ZEPHIR_IS_TRUE(_5);
+		}
+		if (_4) {
+			RETURN_MM_BOOL(1);
+		}
+		zephir_array_fetch_string(&_9, accessRules, SL("users"), PH_NOISY | PH_READONLY, "smce/core/smacl.zep", 35 TSRMLS_CC);
+		zephir_array_fetch_string(&_10, accessRules, SL("redirect"), PH_NOISY | PH_READONLY, "smce/core/smacl.zep", 35 TSRMLS_CC);
+		ZEPHIR_CALL_METHOD(&_8, this_ptr, "logincontrol", &_11, _9, _10, loginState);
+		zephir_check_call_status();
+		if (ZEPHIR_IS_FALSE(_8)) {
+			RETURN_MM_BOOL(0);
+		}
+		_12 = zephir_array_isset_string(accessRules, SS("expression"));
+		if (_12) {
+			zephir_array_fetch_string(&_14, accessRules, SL("expression"), PH_NOISY | PH_READONLY, "smce/core/smacl.zep", 42 TSRMLS_CC);
+			ZEPHIR_CALL_METHOD(&_13, this_ptr, "expressioncontrol", &_15, _14);
+			zephir_check_call_status();
+			_12 = ZEPHIR_IS_TRUE(_13);
+		}
+		if (_12) {
+			RETURN_MM_BOOL(1);
 		}
 	}
 	RETURN_MM_BOOL(0);
@@ -144,12 +137,11 @@ PHP_METHOD(Smce_Core_SmACL, ipAdressSearch) {
 PHP_METHOD(Smce_Core_SmACL, loginControl) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zend_class_entry *_2 = NULL;
 	zend_bool _0;
-	zval *users = NULL, *redirect = NULL, *controller, *_1, *_3 = NULL;
+	zval *users = NULL, *redirect = NULL, *loginState, *router, *_1 = NULL;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 2, &users, &redirect);
+	zephir_fetch_params(1, 1, 2, &users, &redirect, &loginState);
 
 	if (!users) {
 		ZEPHIR_INIT_VAR(users);
@@ -163,30 +155,28 @@ PHP_METHOD(Smce_Core_SmACL, loginControl) {
 
 	_0 = ZEPHIR_IS_STRING(users, "@");
 	if (_0) {
-		_1 = zephir_fetch_nproperty_this(this_ptr, SL("loginState"), PH_NOISY_CC);
-		_0 = ZEPHIR_IS_EMPTY(_1);
+		_0 = ZEPHIR_IS_EMPTY(loginState);
 	}
 	if (_0) {
-		ZEPHIR_INIT_VAR(controller);
-		if (!_2) {
-			_2 = zend_fetch_class(SL("Smce\\Core\\SmController"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-		}
-		object_init_ex(controller, _2);
-		if (zephir_has_constructor(controller TSRMLS_CC)) {
-			ZEPHIR_CALL_METHOD(NULL, controller, "__construct", NULL);
+		ZEPHIR_INIT_VAR(router);
+		object_init_ex(router, smce_core_smrouter_ce);
+		if (zephir_has_constructor(router TSRMLS_CC)) {
+			ZEPHIR_CALL_METHOD(NULL, router, "__construct", NULL);
 			zephir_check_call_status();
 		}
-		ZEPHIR_INIT_VAR(_3);
+		ZEPHIR_INIT_VAR(_1);
 		if (ZEPHIR_IS_STRING(redirect, "")) {
-			ZEPHIR_INIT_NVAR(_3);
-			ZVAL_STRING(_3, "site/login", 1);
+			ZEPHIR_INIT_NVAR(_1);
+			ZVAL_STRING(_1, "site/login", 1);
 		} else {
-			ZEPHIR_CPY_WRT(_3, redirect);
+			ZEPHIR_CPY_WRT(_1, redirect);
 		}
-		ZEPHIR_CALL_METHOD(NULL, controller, "redirect", NULL, _3);
+		ZEPHIR_CALL_METHOD(NULL, router, "redirect", NULL, _1);
 		zephir_check_call_status();
+		RETURN_MM_BOOL(0);
+	} else {
+		RETURN_MM_BOOL(1);
 	}
-	ZEPHIR_MM_RESTORE();
 
 }
 

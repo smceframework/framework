@@ -19,9 +19,10 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_core_smacl_ipadresssearch, 0, 0, 1)
 	ZEND_ARG_INFO(0, ipAdress)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_core_smacl_logincontrol, 0, 0, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_core_smacl_logincontrol, 0, 0, 1)
 	ZEND_ARG_INFO(0, users)
 	ZEND_ARG_INFO(0, redirect)
+	ZEND_ARG_INFO(0, loginState)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_smce_core_smacl_expressioncontrol, 0, 0, 1)
