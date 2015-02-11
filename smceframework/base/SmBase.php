@@ -41,7 +41,15 @@ class SmBase extends CSmBase
         	$this->dbSetting();
         }
 
-       $this->command();
+       
+       try{
+
+       		$this->command();
+
+       }catch(SmHttpException $e){
+       		$e->htppError();
+
+       }
     }
 
     /**
